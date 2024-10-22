@@ -145,13 +145,12 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import './ass.css'; // Create a separate CSS file for styling
+import './ass.css'; 
 
 const App = () => {
-  const [nodes, setNodes] = useState([]); // Array to hold nodes
-  const [inputValue, setInputValue] = useState(''); // State for input field
+  const [nodes, setNodes] = useState([]); 
+  const [inputValue, setInputValue] = useState(''); 
 
-  // Fetch node data from Supabase
   const fetchData = async (id) => {
     try {
       const response = await axios.post(
@@ -159,15 +158,14 @@ const App = () => {
         {},
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlcnZyZWFlYmVva3h6dHdkdG12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0Mzc5MTgsImV4cCI6MjA0NTAxMzkxOH0.StHE9XXzMkhs8YgfK2gBL49GfTnVjkwAlsaffNK1vA8`, // Replace with your service role key
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlcnZyZWFlYmVva3h6dHdkdG12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0Mzc5MTgsImV4cCI6MjA0NTAxMzkxOH0.StHE9XXzMkhs8YgfK2gBL49GfTnVjkwAlsaffNK1vA8`, 
           },
         }
       );
 
       const data = response.data;
       console.log('Fetched Data:', data);
-
-      // Update nodes state with the fetched data
+     
       setNodes((prevNodes) => [
         ...prevNodes,
         ...data.map((item) => ({
@@ -181,76 +179,38 @@ const App = () => {
     }
   };
 
-  // Handle form submission to fetch nodes
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNodes([]); // Reset nodes before fetching new data
+    setNodes([]); 
     fetchData(inputValue);
   };
 
-  // Handle expanding nodes
   const handleExpand = (id) => {
     fetchData(id);
   };
 
   return (
-    <div style={{ padding: '20px', margin: 'auto' }}>
-      <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+    <div className="container">
+      <form onSubmit={handleSubmit} className="fetch-form">
         <input
           type="text"
           placeholder="Enter Root Node ID"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          style={{
-            padding: '10px',
-            fontSize: '16px',
-            marginRight: '10px',
-            borderRadius: '4px',
-            border: '1px solid #ccc',
-          }}
+          className="input-field"
         />
-        <button
-          type="submit"
-          style={{
-            padding: '10px 15px',
-            fontSize: '16px',
-            backgroundColor: '#007BFF',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
+        <button type="submit" className="submit-button">
           Fetch Nodes
         </button>
       </form>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px' }}>
+      <div className="nodes-container">
         {nodes.map((node) => (
-          <div key={node.id} style={{
-            border: '1px solid #ccc',
-            padding: '15px',
-            borderRadius: '8px',
-            width: '200px',
-            height: '140px',
-            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-            backgroundColor: '#fff',
-            position: 'relative', // Add position relative for the expand button
-          }}>
-            <h3 style={{ margin: '0 0 10px' }}>{node.name}</h3>
+          <div key={node.id} className="node-card">
+            <h3 className="node-title">{node.name}</h3>
             <p><strong>ID:</strong> {node.id}</p>
             <p><strong>Parent ID:</strong> {node.parentId || 'None'}</p>
-            <button onClick={() => handleExpand(node.id)} style={{
-              position: 'absolute', // Position the button in the corner
-              bottom: '10px',
-              left: '10px',
-              padding: '5px',
-              backgroundColor: '#28a745',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}>
+            <button onClick={() => handleExpand(node.id)} className="expand-button">
               Expand
             </button>
           </div>
@@ -261,3 +221,4 @@ const App = () => {
 };
 
 export default App;
+

@@ -1,18 +1,95 @@
+/* Basic resets */
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
   }
   
-  h3 {
-    font-size: 18px;
-    color: #333;
+  /* Container for the entire app */
+  .container {
+    max-width: 1200px; /* Maximum width for larger screens */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
   }
   
-  button {
+  /* Form styles */
+  .fetch-form {
+    display: flex; /* Use flexbox for responsive alignment */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    margin-bottom: 20px;
+  }
+  
+  .input-field {
+    flex: 1; /* Allow input field to grow */
+    min-width: 200px; /* Minimum width */
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .submit-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
   }
   
-  button:hover {
-    background-color: #0056b3;
+  /* Container for nodes */
+  .nodes-container {
+    display: flex; /* Use flexbox for node layout */
+    flex-wrap: wrap; /* Wrap nodes to the next line on smaller screens */
+    gap: 10px; /* Space between nodes */
+  }
+  
+  /* Node card styles */
+  .node-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px; /* Fixed width for cards */
+    height: 140px; /* Fixed height for cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    position: relative;
+  }
+  
+  /* Title styles */
+  .node-title {
+    margin: 0 0 10px;
+  }
+  
+  /* Expand button styles */
+  .expand-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 5px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .input-field {
+      flex: 1 1 100%; /* Make input field full width on small screens */
+      margin-right: 0; /* Remove margin */
+    }
+    
+    .submit-button {
+      flex: 1 1 100%; /* Make button full width */
+      margin-top: 10px; /* Add margin on top */
+    }
+    
+    .node-card {
+      width: 100%; 
+      height: auto; 
+    }
   }
   
